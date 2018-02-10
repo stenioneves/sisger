@@ -3,6 +3,8 @@ package org.sisger.conf;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /***
@@ -12,7 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @EnableWebMvc
 @ComponentScan(basePackages="org.sisger.controllers")
-public class AppWebConfiguration { 
+public class AppWebConfiguration extends  WebMvcConfigurerAdapter { 
 	
 /***
  * método de configuração de localização das views e a extensão do arquivo
@@ -27,5 +29,8 @@ public class AppWebConfiguration {
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
-	
+	 
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
 }

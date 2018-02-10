@@ -12,10 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {	
 	
-	@RequestMapping("/")
+	@RequestMapping("/")// Tela de login
 	public ModelAndView index(){
-		 ModelAndView andView =new 
-		return ;
+		 ModelAndView andView =new ModelAndView("index");
+		return andView ;
 		
 	}
 	
