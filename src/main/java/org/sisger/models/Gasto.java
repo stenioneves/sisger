@@ -8,5 +8,9 @@ package org.sisger.models;
 
 
 public class Gasto {
+	String nome;
+	Double valor;
+	Categoria categoria;
+	
 
 }

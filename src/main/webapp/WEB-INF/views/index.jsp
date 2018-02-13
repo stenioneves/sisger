@@ -8,7 +8,7 @@
  <link href="resources/css/mycss.css" rel="stylesheet">
  <title>Tela Login</title>
 </head>
-<body>
+<body class="fin">
 <section class="login-bloq" >
 
     
