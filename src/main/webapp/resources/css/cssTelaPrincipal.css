@@ -1,0 +1,56 @@
+ /* Remove o navbar's padrao margin-bottom e aredonda as bordas( borders) */ 
+ .navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+  
+  /* Adiciona cor cinza como  background  e define o padding para o footer */
+  footer {
+    background-color: #f2f2f2;
+    padding: 25px;
+  }
+  /* centralização da ultima categoria*/
+.centralizar{
+ margin-left: 40%;
+ padding-top: 10px;
+ padding: 10px;
+ 
+  }
+/*Configuração da tag figure e  figurecaption*/
+ figure{
+    position: relative;
+}
+figure figcaption{
+	
+	position:absolute;
+	top:0px;
+	background-color:rgba(0, 0, 0, 0.473);
+	color:white;
+	width:100%;
+	height:100%;
+	padding:10px;
+	box-sizing:border-box;
+	opacity:0;
+	transition:opacity 1s;
+}
+figure:hover figcaption{
+	
+	opacity:1;
+	
+}
+/* confuração do botão dentro do figurecaption*/
+.btn-conf{
+    text-decoration:none;
+    margin-top: 50px;
+}
+/** Div de efeito 3d **/
+div#efeito{
+    
+    box-shadow:0px 0px 10px rgba(0,0,0,0.5);
+    padding-top: 20px;
+	
+}
+body{
+    width: auto;
+    height: auto;
+}
