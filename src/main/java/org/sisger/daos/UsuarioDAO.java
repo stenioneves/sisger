@@ -12,6 +12,11 @@ public class UsuarioDAO {
 	private EntityManager manager;
 	
 	
+	/***
+	 * Receber um objeto do tipo usuario somente com e-mail e senha e faz consulta no BD para localizar esse usuario  
+	 * @param user
+	 * @return usuario
+	 */
 	public Usuario consutarUsuario(Usuario user){
 		
 		return manager.createQuery("from Usuario u where u.email=:email"
