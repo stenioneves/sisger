@@ -1,6 +1,7 @@
 package org.sisger.controllers;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.sisger.daos.UsuarioDAO;
 import org.sisger.models.Usuario;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
+@Transactional
 public class HomeController {
 	
 	@Autowired
@@ -30,7 +32,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="efetuarLogin",method=RequestMethod.POST)
-	public ModelAndView autenticação( Usuario user,RedirectAttributes redirectAttributes,HttpSession sessao){
+	public ModelAndView autenticacao( Usuario user,RedirectAttributes redirectAttributes,HttpSession sessao){
 		
 		Usuario us= usuarioDAO.consutarUsuario(user);
 		if(user.getEmail().equals(us.getEmail())&& user.getSenha().equals(us.getSenha()))
