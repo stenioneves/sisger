@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  *
  */
 @EnableWebMvc
-@ComponentScan(basePackages="org.sisger.controllers")
+@ComponentScan(basePackages="org.sisger.controllers,org.sisger.daos")// Atenção com os pacotes
 public class AppWebConfiguration extends  WebMvcConfigurerAdapter { 
 	
 /***
