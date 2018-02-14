@@ -1,6 +1,7 @@
 package org.sisger.daos;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.sisger.models.Usuario;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ public class UsuarioDAO {
 	 * @param user
 	 * @return usuario
 	 */
-	public Usuario consutarUsuario(Usuario user){
+	public Usuario consutarUsuario(Usuario user) throws NoResultException{
 		
 		return manager.createQuery("from Usuario u where u.email=:email"
 				  ,Usuario.class).setParameter("email",user.getEmail())

@@ -1,3 +1,7 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"	prefix="c"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,7 +21,7 @@
                 <div class="row">
                     <div class="col-md-4 login-sec">
                         <h2 class="text-center">AUTENTICAÇÃO</h2>
-                        <form class="login-form" method="post">
+                        <form:form class="login-form" action="${spring:mvcUrl('HC#autenticacao').build()}" commandName="usuario">
               <div class="form-group">
                 <label for="Email" class="text-uppercase">Usuário</label>
                 <input type="text" class="form-control" placeholder="Digite seu usuário " id="Email" name="email">
@@ -36,8 +40,8 @@
                 <button type="submit" class="btn btn-login float-right">Enviar</button>
               </div>
               
-            </form>
-            
+            </form:form>
+                       ${erro}
                     </div>
                     <div class="col-md-8 banner-sec">
                         

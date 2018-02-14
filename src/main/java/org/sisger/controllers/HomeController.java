@@ -1,5 +1,6 @@
 package org.sisger.controllers;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -33,7 +34,7 @@ public class HomeController {
 	
 	@RequestMapping(value="efetuarLogin",method=RequestMethod.POST)
 	public ModelAndView autenticacao( Usuario user,RedirectAttributes redirectAttributes,HttpSession sessao){
-		
+		 try{
 		Usuario us= usuarioDAO.consutarUsuario(user);
 		if(user.getEmail().equals(us.getEmail())&& user.getSenha().equals(us.getSenha()))
 		{
@@ -42,10 +43,13 @@ public class HomeController {
 		}
 		else
 		{
-			redirectAttributes.addFlashAttribute("erro"," <div class=\"alert alert-danger\"> Ops! Seus dados não foram localizados :( </div>");
+			redirectAttributes.addFlashAttribute("erro"," <div class=\"alert alert-danger\"> Usuário ou senha inválidos :( </div>");
 			return new ModelAndView("redirect:/");
 		}
-		
+		 }catch(NoResultException e){
+			 redirectAttributes.addFlashAttribute("erro"," <div class=\"alert alert-danger\">Usuário não encontrado no sistema </div>");
+				return new ModelAndView("redirect:/");
+		 }
 	}
 
 }
