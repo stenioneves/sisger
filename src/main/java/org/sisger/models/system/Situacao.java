@@ -1,4 +1,4 @@
-package org.sisger.models;
+package org.sisger.models.system;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,13 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/***
+ * classe do sistema para apoio de listagem da situação que irá virar tb de apoio.
+ * @author stenio
+ *
+ */
 @Entity
-@Table(name="tipo_categoria")
-public class Categoria {
+@Table(name="tb_apoio_situacao")
+public class Situacao {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
-	@Column(name="nome_categoria",length=20)
+    private int idSituacao;
+    @Column(name="nomeSituacao",length=20)
 	private String nome;
 
 	public String getNome() {
@@ -24,12 +29,14 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public int getId() {
-		return id;
+	public int getIdSituacao() {
+		return idSituacao;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdSituacao(int idSituacao) {
+		this.idSituacao = idSituacao;
 	}
+
+	
 	
 }
