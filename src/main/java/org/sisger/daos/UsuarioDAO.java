@@ -26,4 +26,8 @@ public class UsuarioDAO {
 		
 	}
 
+	
+	public void criarUsuario(Usuario use){
+		manager.persist(use);
+	}
 }

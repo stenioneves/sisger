@@ -12,12 +12,15 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Classe de configuração hibernate via spring
  * @author stenio
  *
  */
+@EnableTransactionManagement //sem isso voce não persiste ;)  No EntityManager with actual transaction available for current thread - cannot reliably process 'persist' call
+
 public class JPAConfiguration {
 
 	@Bean

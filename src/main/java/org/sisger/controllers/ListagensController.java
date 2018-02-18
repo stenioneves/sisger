@@ -1,0 +1,93 @@
+package org.sisger.controllers;
+
+import javax.persistence.Access;
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+
+import org.sisger.daos.Fatura_GastosDAO;
+import org.sisger.daos.GastaoDAO;
+import org.sisger.daos.MetodoDAO;
+import org.sisger.daos.system.SituacaoDAO;
+import org.sisger.models.Fatura_Gastos;
+import org.sisger.models.Metodo;
+import org.sisger.models.Usuario;
+import org.sisger.models.system.Situacao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+/***
+ * Classe para controle da view de listagem e outras funções
+ * @author stenio
+ *
+ */
+
+@Controller
+@RequestMapping("listagem/")
+@Transactional
+public class ListagensController {
+	
+	@Autowired
+	private Fatura_GastosDAO faturagasto;
+    @Autowired
+	private MetodoDAO metododao;
+    @Autowired
+   private SituacaoDAO siti;
+	
+	@RequestMapping("credito")
+	public ModelAndView listarCredito(RedirectAttributes redirectAttributes,HttpSession sessao){
+		if(sessao.getAttribute("usuario")==null){
+			redirectAttributes.addFlashAttribute("erro","<div class=\" alert alert-danger\"> <strong>Acesso negado! </strong>"+
+		" Você não está logado !</div>");
+			return new ModelAndView("redirect:/");
+			
+		}
+		ModelAndView model=new ModelAndView("listagem/credito");
+		model.addObject("cons",faturagasto.listarFaturaCreditoAberto(auxilioListagemCredito(), auxilioListamSitCredito()));
+		 for(Fatura_Gastos f:faturagasto.listarFaturaCreditoAberto(auxilioListagemCredito(), auxilioListamSitCredito())){
+			 System.out.println(f.getResponsavel().getNome());
+		 }
+		return model;
+	}
+	
+	/**
+	uestMapping("teste")
+	public ModelAndView teste( HttpSession sessao){
+		Metodo m =new Metodo();
+		m.setAtivo(true);
+		//m.setIdMetodo(1);
+		m.setNome("ourocard");
+		m.setTipo("credito");
+		//metododao.criarMetdo(m);
+		Situacao sit = new Situacao();
+		//sit.setIdSituacao(1);
+		sit.setNome("Pendente");
+		//siti.inserir(sit);
+		Fatura_Gastos gf =new Fatura_Gastos();
+		gf.setMetodotipo(m);
+		gf.setSituacao(sit);
+		gf.setResponsavel((Usuario)sessao.getAttribute("usuario"));
+		//faturagasto.criarFaturaGasto(gf);
+		
+		 for ( Fatura_Gastos f:faturagasto.listarFaturaCreditoAberto(m, sit))
+		 {
+			 System.out.println("Codigos faturas:"+f.getCodfatura());
+		 }
+		return new ModelAndView("ok");
+		
+	}**/
+	private  Metodo auxilioListagemCredito(){
+		
+		Metodo m= new Metodo();
+		m.setTipo("credito");
+		return m;
+	}
+	
+	private Situacao auxilioListamSitCredito(){
+		Situacao sit =new Situacao();
+		sit.setNome("Pendente");
+		return sit;
+	}
+}

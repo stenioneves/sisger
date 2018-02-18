@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.sisger.daos.UsuarioDAO;
+import org.sisger.daos.system.SituacaoDAO;
 import org.sisger.models.Usuario;
+import org.sisger.models.system.Situacao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,7 @@ public class HomeController {
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	
+	
 	@RequestMapping("/")// Tela de login
 	public ModelAndView index(Usuario user){
 		 ModelAndView andView =new ModelAndView("index");
@@ -39,7 +42,10 @@ public class HomeController {
 		if(user.getEmail().equals(us.getEmail())&& user.getSenha().equals(us.getSenha()))
 		{
 			sessao.setAttribute("usuario", us);
+			
 			return new ModelAndView("redirect:principal");
+			
+			
 		}
 		else
 		{
