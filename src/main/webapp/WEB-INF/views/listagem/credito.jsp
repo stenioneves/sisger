@@ -45,13 +45,13 @@
   <p> Listando <!--fatura de gasto em aberto na modalidade credito e o cartão associado:--></p>
   <ul class="w3-ul w3-card-4 w3-hoverable">
    <c:forEach var="fatura" items="${cons}">
-    <li class="w3-bar" onclick="document.getElementById('id01').style.display='block'">
+    <li class="w3-bar" onclick="document.getElementById('${fatura.gf.codfatura}').style.display='block'">
       <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
       <img src="imgs/ourcard.png" class="w3-bar-item w3-round w3-hide-small" style="width:85px">
       <div class="w3-bar-item">
-        <span class="w3-xlarge">${fatura.metodotipo.nome}</span><br>
-        <span>${fatura.situacao.nome}</span><br>
-        <span class="w3-center w3-small w3-opacity"> ${fatura.responsavel.nome}</span>
+        <span class="w3-xlarge">${fatura.gf.metodotipo.nome}</span><br><!-- Pode ser substituido pelo Angular -->
+        <span>${fatura.gf.situacao.nome}</span><br>
+        <span class="w3-center w3-small w3-opacity"> ${fatura.gf.responsavel.nome}</span><!-- fatura é uma estrutura de dados compexa atenção-->
       </div>
     
     </li>
@@ -59,12 +59,13 @@
 
     
   </ul>
-  <div id="id01" class="w3-modal">
+  <c:forEach var="fat_gs" items="${cons}">
+  <div id="${fat_gs.gf.codfatura}" class="w3-modal">
       <div class="w3-modal-content">
         
           <header class="w3-container w3-indigo">
-          <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-          <h2>Texto..</h2>
+          <span onclick="document.getElementById('${fat_gs.gf.codfatura}').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <h2>Gastos associados a fatura: ${fat_gs.gf.codfatura}</h2>
           </header>
           <div class="w3-container">
               <table class="w3-table-all">
@@ -75,6 +76,15 @@
                       <th>valor</th>
                     </tr>
                   </thead>
+                  <c:forEach var="gasto" items="${fat_gs.gastos_associados}">
+                   <tr class="w3-hover-blue">
+                   <td>${gasto.nome}</td>
+                   <td>${gasto.categoria.nome}</td>
+                   <td>${gasto.valor}</td>
+                  
+                  </tr>
+                  </c:forEach>
+                  <!--  
                   <tr class="w3-hover-green">
                     <td>Jean Neves</td>
                     <td>Serviços Web</td>
@@ -95,6 +105,7 @@
                     <td>Nilson</td>
                     <td>35</td>
                   </tr>
+                  -->
                 </table>
         </div>
         <footer class="w3-container w3-indigo">
@@ -102,6 +113,7 @@
         </footer>
       </div>
     </div>
+    </c:forEach>
 </div>
 <!--
 <footer class="container-fluid text-center">

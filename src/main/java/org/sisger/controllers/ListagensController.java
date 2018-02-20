@@ -1,6 +1,10 @@
 package org.sisger.controllers;
 
-import javax.persistence.Access;
+import org.sisger.controllers.system.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -10,7 +14,6 @@ import org.sisger.daos.MetodoDAO;
 import org.sisger.daos.system.SituacaoDAO;
 import org.sisger.models.Fatura_Gastos;
 import org.sisger.models.Metodo;
-import org.sisger.models.Usuario;
 import org.sisger.models.system.Situacao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,9 +35,7 @@ public class ListagensController {
 	@Autowired
 	private Fatura_GastosDAO faturagasto;
     @Autowired
-	private MetodoDAO metododao;
-    @Autowired
-   private SituacaoDAO siti;
+	private GastaoDAO gastodao;
 	
 	@RequestMapping("credito")
 	public ModelAndView listarCredito(RedirectAttributes redirectAttributes,HttpSession sessao){
@@ -45,9 +46,10 @@ public class ListagensController {
 			
 		}
 		ModelAndView model=new ModelAndView("listagem/credito");
-		model.addObject("cons",faturagasto.listarFaturaCreditoAberto(auxilioListagemCredito(), auxilioListamSitCredito()));
+		model.addObject("cons",listarGastosPorFaturaCredito());
 		 for(Fatura_Gastos f:faturagasto.listarFaturaCreditoAberto(auxilioListagemCredito(), auxilioListamSitCredito())){
 			 System.out.println(f.getResponsavel().getNome());
+			
 		 }
 		return model;
 	}
@@ -90,4 +92,17 @@ public class ListagensController {
 		sit.setNome("Pendente");
 		return sit;
 	}
+	
+	private List<ListagemEstrura> listarGastosPorFaturaCredito(){
+		List<ListagemEstrura> listagemEstruraFaturas=new  ArrayList<ListagemEstrura>();
+		for (Fatura_Gastos fs:faturagasto.listarFaturaCreditoAberto(auxilioListagemCredito(),auxilioListamSitCredito())){
+			 ListagemEstrura ls= new ListagemEstrura();
+			 ls.setGf(fs);
+			 ls.setGastos_associados(gastodao.listarporFatura(fs));
+			 listagemEstruraFaturas.add(ls);
+			
+		}
+		return listagemEstruraFaturas;
+	}
+	
 }
