@@ -28,4 +28,7 @@ public class GastaoDAO {
 		return manage.createQuery("from Gasto g where g.faturaAssociativa.codfatura=:id",Gasto.class).setParameter("id",fatgasto.getCodfatura()).getResultList();
 	}
 
+	List<Gasto>listarGastos(){
+		return manage.createQuery("select distinct(g) from Gasto g",Gasto.class).getResultList();
+	}
 }
