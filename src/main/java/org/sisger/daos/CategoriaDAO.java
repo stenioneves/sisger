@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.sisger.models.Categoria;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class CategoriaDAO {
 	
 	@PersistenceContext

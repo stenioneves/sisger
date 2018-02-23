@@ -1,6 +1,5 @@
 package org.sisger.daos;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -9,11 +8,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MetodoDAO {
-	
+
 	@PersistenceContext
 	private EntityManager manager;
-	
-	public void criarMetdo(Metodo met){
+
+	public void criarMetdo(Metodo met) {
 		manager.persist(met);
 	}
 

@@ -9,26 +9,24 @@ import org.sisger.models.Fatura_Gastos;
 import org.sisger.models.Gasto;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
 public class GastaoDAO {
-	
-	
+
 	@PersistenceContext
 	private EntityManager manage;
-	
-	
-	public void inserGasto(Gasto gasto){
-		
+
+	public void inserGasto(Gasto gasto) {
+
 		manage.persist(gasto);
 	}
-	
-	public  List<Gasto> listarporFatura(Fatura_Gastos fatgasto){
-		
-		return manage.createQuery("from Gasto g where g.faturaAssociativa.codfatura=:id",Gasto.class).setParameter("id",fatgasto.getCodfatura()).getResultList();
+
+	public List<Gasto> listarporFatura(Fatura_Gastos fatgasto) {
+
+		return manage.createQuery("from Gasto g where g.faturaAssociativa.codfatura=:id", Gasto.class)
+				.setParameter("id", fatgasto.getCodfatura()).getResultList();
 	}
 
-	List<Gasto>listarGastos(){
-		return manage.createQuery("select distinct(g) from Gasto g",Gasto.class).getResultList();
+	List<Gasto> listarGastos() {
+		return manage.createQuery("select distinct(g) from Gasto g", Gasto.class).getResultList();
 	}
 }

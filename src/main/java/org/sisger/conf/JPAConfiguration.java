@@ -16,53 +16,49 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Classe de configuração hibernate via spring
+ * 
  * @author stenio
  *
  */
-@EnableTransactionManagement //sem isso voce não persiste ;)  No EntityManager with actual transaction available for current thread - cannot reliably process 'persist' call
+@EnableTransactionManagement // sem isso voce não persiste ;) No EntityManager with actual transaction
+								// available for current thread - cannot reliably process 'persist' call
 
 public class JPAConfiguration {
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean
-	  entityManagerFactoryBean(){
+	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
-		em.setPackagesToScan(new String[] 
-				{"org.sisger.models"});
-		JpaVendorAdapter vendorAdapter =
-				new HibernateJpaVendorAdapter();
+		em.setPackagesToScan(new String[] { "org.sisger.models" });
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
 		em.setJpaProperties(additionalProperties());
 		return em;
 	}
-	
-	
+
 	@Bean
-	public DataSource dataSource(){
-		DriverManagerDataSource dataSource =
-				new DriverManagerDataSource();
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/sisger");
 		dataSource.setUsername("root");
 		dataSource.setPassword("");
 		return dataSource;
 	}
-	
+
 	@Bean
-	private Properties additionalProperties(){
-		Properties properties =
-				new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto","update");
-		properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5Dialect" );
-		properties.setProperty("hibernate.show_sql","true");
+	private Properties additionalProperties() {
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+		properties.setProperty("hibernate.show_sql", "true");
 		return properties;
 	}
-	
+
 	@Bean
-	public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
-		JpaTransactionManager	transactionManager =new	JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(emf);					
-		 return	transactionManager;
+	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(emf);
+		return transactionManager;
 	}
 }

@@ -8,12 +8,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class SituacaoDAO {
-	
+
 	@PersistenceContext
 	private EntityManager manage;
-	
-	public void inserir(Situacao sit){
-		
+
+	public void inserir(Situacao sit) {
+
 		manage.persist(sit);
 	}
 
