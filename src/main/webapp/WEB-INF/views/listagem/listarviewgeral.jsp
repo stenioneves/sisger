@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"	prefix="c"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -7,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Modulo de gasto crédito</title>
+<title>Módulo de Histórico</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -37,10 +38,10 @@
 						class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="../form/formgasto">Informar Gasto</a></li>
-						<li><a href="../form/formfatura">Criar Fatura</a></li>
+						<li><a href="../form/formfatura">Criar Historico</a></li>
 						<li><a href="../form/formcategoria">Criar Categoria </a></li>
 						<li><a href="../form/formmetodo">Cadastrar Metodo</a></li>
-						<li><a href="todasfaturas">Faturas Pedente</a></li>
+						<li><a href="todasfaturas">Historico Pedente</a></li>
 					</ul></li>
 				<!--- 
         <li><a href="#">Contact</a></li>-->
@@ -56,14 +57,15 @@
 		<h2>Esse é o retono para</h2>
 		<p>
 			${modo}
-			<!--fatura de gasto em aberto na modalidade credito e o cartão associado:-->
+			<!--fatura de gasto em aberto na modalidade credito/Debito e dinheiro fisico e o cartão associado:-->
 		</p>
 		<ul class="w3-ul w3-card-4 w3-hoverable">
 			<c:forEach var="fatura" items="${cons}">
 				<li class="w3-bar"
-					onclick="document.getElementById('${fatura.gf.codfatura}').style.display='block'">
+					onclick="document.getElementById('${fatura.gf.codfatura}').style.display='block'" title=" Valor parcial R$:${fatura.soma}">
 					<span onclick="this.parentElement.style.display='none'"
 					class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+					<span class="w3-bar-item w3-right"><fmt:formatDate value="${fatura.gf.criacao }" pattern="dd/MM/yyyy"/></span>
 					<img src="${fatura.gf.metodotipo.fileimg}"
 					class="w3-bar-item w3-round w3-hide-small" style="width: 130px">
 					<div class="w3-bar-item">
@@ -87,7 +89,7 @@
 					<header class="w3-container w3-indigo"> <span
 						onclick="document.getElementById('${fat_gs.gf.codfatura}').style.display='none'"
 						class="w3-button w3-display-topright">&times;</span>
-					<h2>Gastos associados a fatura: ${fat_gs.gf.codfatura}</h2>
+					<h5>Gastos associados ao historico: ${fat_gs.gf.codfatura}</h5>
 					</header>
 					<div class="w3-container">
 						<table class="w3-table-all">
@@ -95,7 +97,8 @@
 								<tr class="w3-light-grey w3-hover-red">
 									<th>Nome</th>
 									<th>Tipo</th>
-									<th>valor</th>
+									<th>Valor</th>
+									<th>Data</th>
 								</tr>
 							</thead>
 							<c:forEach var="gasto" items="${fat_gs.gastos_associados}">
@@ -103,7 +106,7 @@
 									<td>${gasto.nome}</td>
 									<td>${gasto.categoria.nome}</td>
 									<td>${gasto.valor}</td>
-
+									<td><fmt:formatDate value="${gasto.dateGasto}" pattern="dd/MM/yyyy"/>  </td>
 								</tr>
 							</c:forEach>
 							<!--  
@@ -131,7 +134,7 @@
 						</table>
 					</div>
 					<footer class="w3-container w3-indigo">
-					<p>texto</p>
+					<p>Total R$: ${fat_gs.soma}</p>
 					</footer>
 				</div>
 			</div>

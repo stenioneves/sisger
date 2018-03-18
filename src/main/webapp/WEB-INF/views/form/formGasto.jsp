@@ -14,10 +14,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../resources/css/jquery-ui.css">
 <script src="../resources/js/jquery.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="../resources/js/myjs/myjs.js"></script>
 <script src="../resources/js/jquery-ui.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="w3-container">
 	<nav class="navbar navbar-inverse">
@@ -59,18 +59,19 @@
 		</div>
 		${msg}
 		<div class="w3-row">
-			<form:form action="${spring:mvcUrl('FC#savarGasto').build()}"
+			<form:form action="${spring:mvcUrl('FC#salvarGasto').build()}"
 				class="w3-container w3-card-4" commandName="gasto">
-				<p class="w3-col s6">
-					<label>Nome</label> <input class="w3-input w3-hover-blue w3-border"
+				<p class="w3-col s4">
+					<label>Nome</label> <input class="w3-input  w3-border w3-light-grey"
 						type="text" name="nome">
 				</p>
-				<p class="w3-col s6">
+				<p class="w3-col s1"></p>
+				<p class="w3-col s4">
 					<label>Valor</label> <input
-						class="w3-input w3-hover-blue w3-border" type="text" name="valor">
+						class="w3-input  w3-border w3-light-grey" type="text" name="valor">
 				</p>
 				<p class="w3-col s12">
-					<label>Categoria</label> <select class="w3-select w3-border"
+					<label>Categoria</label> <select class="w3-select w3-border w3-light-grey"
 						name="categoria.id">
 						<option value="" disabled selected>Selecione uma opção</option>
 						<c:forEach var="categoria" items="${categoria}">
@@ -82,28 +83,30 @@
 					<label>Data</label>
 					<!--  <input type="datetime"  class="w3-input" title="Data do Gasto" name="dateGasto">-->
 					<input type="text" id="datepicker" name="dateGasto"
-						class="w3-input w3-border">
+						class="w3-input w3-border w3-light-grey">
 				</p>
 				<p class="w3-col s1"></p>
 				<p class="w3-col s6">
 					<label>Metodo de Pagamento:</label> <select
-						class="w3-select w3-border" name="faturaAssociativa.codfatura">
+						class="w3-select w3-border w3-light-grey " name="faturaAssociativa.codfatura">
 						<option value="" disabled selected>Selecione uma opção</option>
 						<c:forEach var="fat" items="${fat}">
-							<option value="${fat.codfatura}">${fat.metodotipo.nome}</option>
+							<option value="${fat.codfatura}" >${fat.metodotipo.nome}</option>
 
 						</c:forEach>
 					</select>
 				</p>
 				<p class="w3-col s12">
 					<label for="des">Descrição</label> </br>
-					<textarea rows="10" cols="140" id="des" class="w3-input w3-border"
+					<textarea rows="10" cols="140" id="des" class="w3-input w3-border w3-light-grey"
 						name="descricao">
    </textarea>
 				</p>
-
+				<p class="w3-col s12">
 				<button class="w3-button w3-block w3-gray" style="width: 30%">SAVAR</button>
+				</p>
 			</form:form>
+			<br>
 		</div>
 	</header>
 

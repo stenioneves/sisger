@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,7 +36,8 @@ public class Gasto {
 	private String nome;
 	@Column(scale = 2)
 	private Double valor;
-
+	@DateTimeFormat(pattern="MM/dd/yyyy")
+    @Temporal(TemporalType.DATE)
 	private Date dateGasto;
 	@Lob
 	private String descricao;

@@ -49,8 +49,8 @@ public class ListagensController {
 		}
 		ModelAndView model = new ModelAndView("listagem/listarviewgeral");
 		model.addObject("cons", listarFaturaGeral(
-				faturagasto.listarFaturaCreditoAberto(this.auxilioListagemCredito(), this.auxilioListamSitCredito())));
-		model.addObject("modo", " Faturas de credito pendente");
+				faturagasto.listarFaturasPorMetodoSit(this.auxilioMetodoPag("credito"),this.auxilioSit("Pendente"))));
+		model.addObject("modo", " Historico de credito pendente");
 		return model;
 	}
 
@@ -65,7 +65,7 @@ public class ListagensController {
 		}
 		ModelAndView model = new ModelAndView("listagem/listarviewgeral");
 		model.addObject("cons", listarFaturaGeral(faturagasto.listarFaturasAbertas()));
-		model.addObject("modo", "Todas Faturas de Gastos pendente");
+		model.addObject("modo", "Todos os Historicos de Gastos pendente");
 		return model;
 	}
 
@@ -85,16 +85,36 @@ public class ListagensController {
 	 * 
 	 * }
 	 **/
-	private Metodo auxilioListagemCredito() {
+	
+	@RequestMapping("dinheiro")
+	public ModelAndView listarFaturaDinheiro(HttpSession sessao,RedirectAttributes redirectAttributes) {
+		
+		if (sessao.getAttribute("usuario") == null) {
+			redirectAttributes.addFlashAttribute("erro",
+					"<div class=\" alert alert-danger\"> <strong>Acesso negado! </strong>"
+							+ " Você não está logado!</div>");
+			return new ModelAndView("redirect:/");
+
+		}
+		ModelAndView model = new ModelAndView("listagem/listarviewgeral");
+		model.addObject("cons", listarFaturaGeral(
+				faturagasto.listarFaturasPorMetodoSit(this.auxilioMetodoPag("dinheiro"),this.auxilioSit("Pendente"))));
+		model.addObject("modo", " Historico aberto para modilidade dinheiro");
+		return model;
+		
+	}
+	
+	
+	private Metodo auxilioMetodoPag(String argu) {
 
 		Metodo m = new Metodo();
-		m.setTipo("credito");
+		m.setTipo(argu);
 		return m;
 	}
 
-	private Situacao auxilioListamSitCredito() {
+	private Situacao auxilioSit(String argu) {
 		Situacao sit = new Situacao();
-		sit.setNome("Pendente");
+		sit.setNome(argu);
 		return sit;
 	}
 
@@ -113,7 +133,9 @@ public class ListagensController {
 			ListagemEstrura ls = new ListagemEstrura();
 			ls.setGf(fs);
 			ls.setGastos_associados(gastodao.listarporFatura(fs));
+			ls.somar();
 			listagemEstruraFaturas.add(ls);
+		    
 
 		}
 		return listagemEstruraFaturas;

@@ -36,7 +36,7 @@
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="form/formgasto">Informar Gasto</a></li>
-							<li><a href="form/formfatura">Criar Fatura</a></li>
+							<li><a href="form/formfatura">Criar Historico</a></li>
 							<li><a href="form/formcategoria">Criar Categoria </a></li>
 							<li><a href="form/formmetodo">Cadastrar Metodo</a></li>
 						</ul></li>
@@ -75,51 +75,44 @@
 					</figure>
 				</div>
 				<div class="col-sm-3">
-					<p class="panel panel-danger">Contas e Faturas</p>
+					<p class="panel panel-danger">Informar Gasto</p>
 					<figure>
 						<img src="resources/img/contas_faturas.jpg" class="img-responsive"
 							style="width: 100%" alt="Image">
 						<figcaption>
-							<a href="#"><button class="btn btn-info btn-conf">Acessar</button></a>
+							<a href="form/formgasto"><button class="btn btn-info btn-conf">Acessar</button></a>
 						</figcaption>
 					</figure>
 				</div>
-				<div class="col-sm-3">
-					<p class="panel panel-success">Alimentação</p>
+				<div class="col-sm-3 ">
+					<p class="panel panel-success">Gasto Dinheiro/Débito</p>
 					<figure>
-						<img src="resources/img/alimentacao.jpeg" class="img-responsive"
+						<img src="resources/img/dinheiro.jpeg" class="img-responsive"
 							style="width: 100%" alt="Image">
 						<figcaption>
-							<a href="#"><button class="btn btn-info btn-conf">Acessar</button></a>
+							<a href="listagem/dinheiro"><button class="btn btn-info btn-conf">Acessar</button></a>
 						</figcaption>
 					</figure>
 				</div>
+				 
 				<div class="col-sm-3">
-					<p class="panel panel-warning ">Roupa/Calçados</p>
+					<p class="panel panel-warning ">Criar Historico</p>
 					<figure>
-						<img src="resources/img/roupa.jpg" class="img-responsive"
-							style="width: 90%" alt="Image">
+						<img src="resources/img/cifrao.jpg" class="img-responsive"
+							style="width: 68%" alt="Image">
 						<figcaption>
-							<a href="#"><button class="btn btn-info btn-conf">Acessar</button></a>
+							<a href="form/formfatura"><button class="btn btn-info btn-conf">Acessar</button></a>
 						</figcaption>
 					</figure>
 				</div>
+				
 			</div>
 		</div>
 		<br>
 
 		<div class="container-fluid bg-3 text-center ">
 			<div class="row">
-				<div class="col-sm-3 centralizar">
-					<p class="panel panel-success">Gasto Dinheiro/Débito</p>
-					<figure>
-						<img src="resources/img/dinheiro.jpeg" class="img-responsive"
-							style="width: 100%" alt="Image">
-						<figcaption>
-							<a href="#"><button class="btn btn-info btn-conf">Acessar</button></a>
-						</figcaption>
-					</figure>
-				</div>
+				
 
 
 

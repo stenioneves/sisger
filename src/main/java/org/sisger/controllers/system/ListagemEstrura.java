@@ -6,7 +6,7 @@ import org.sisger.models.Fatura_Gastos;
 import org.sisger.models.Gasto;
 
 public class ListagemEstrura {
-	
+	private Double soma=0.0;
 	private Fatura_Gastos gf;
 	private List<Gasto>gastos_associados;
 	public Fatura_Gastos getGf() {
@@ -21,6 +21,18 @@ public class ListagemEstrura {
 	public void setGastos_associados(List<Gasto> gastos_associados) {
 		this.gastos_associados = gastos_associados;
 	}
-	 
+	public Double getSoma() {
+		return soma;
+	}
+	public void setSoma(Double soma) {
+		this.soma = soma;
+	}
+	
+	public void somar() {
+		for(Gasto g: this.gastos_associados) {
+			this.setSoma(getSoma()+g.getValor());
+			
+		}
+	}
 
 }

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="resources/css/bootstrap.css" rel="stylesheet">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/mycss.css" rel="stylesheet">
 <title>Tela Login</title>
 </head>
@@ -66,7 +66,7 @@
 
 	<!-- Scripts-->
 
-	<script src="resources/js/bootsrap.js"></script>
-	<script src="resources/js/myscript.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
+	
 </body>
 </html>

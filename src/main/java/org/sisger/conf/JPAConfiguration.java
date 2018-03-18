@@ -40,8 +40,8 @@ public class JPAConfiguration {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/sisger");
-		dataSource.setUsername("root");
+		dataSource.setUrl("jdbc:mysql://191.6.202.37:3306/");
+		dataSource.setUsername("");
 		dataSource.setPassword("");
 		return dataSource;
 	}

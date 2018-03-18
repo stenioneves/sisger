@@ -1,9 +1,8 @@
 package org.sisger.models;
 
-import java.sql.Date;
-import java.time.LocalDate;
 
-import javax.persistence.Column;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +12,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.sisger.models.system.Situacao;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,16 +29,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "fatura_gastos")
 public class Fatura_Gastos {
-
+ 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long codfatura;
 	@ManyToOne
 	@JoinColumn(name = "idMetodo")
 	private Metodo metodotipo;
-
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
 	private Date criacao;
-
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
 	private Date fechamento;
 	@ManyToOne
 	@JoinColumn(name = "idSituacao")

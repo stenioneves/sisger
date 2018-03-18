@@ -22,7 +22,7 @@ public class Fatura_GastosDAO {
 
 	}
 
-	public List<Fatura_Gastos> listarFaturaCreditoAberto(Metodo metodo, Situacao sit) {
+	public List<Fatura_Gastos> listarFaturasPorMetodoSit(Metodo metodo, Situacao sit) {
 
 		return manager
 				.createQuery("from Fatura_Gastos fg where fg.metodotipo.tipo=:tipo and fg.situacao.nome=:nome",
