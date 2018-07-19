@@ -39,7 +39,7 @@ public class FormsController {
 
 	@RequestMapping(value = "salvarGasto", method = RequestMethod.POST)
 	public ModelAndView salvarGasto(Gasto gasto, RedirectAttributes redirectAttributes, HttpSession sessao) {
-
+           //Usar a bean validation
 		if (gasto == null) {
 			// Teste basico, mas a validação dos campos será via html/javascript
 			redirectAttributes.addFlashAttribute("msg", "<div class=\"alert alert-info\">Formulario em branco</div>");

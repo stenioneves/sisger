@@ -17,7 +17,9 @@ import org.sisger.models.Metodo;
 import org.sisger.models.system.Situacao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -140,5 +142,37 @@ public class ListagensController {
 		}
 		return listagemEstruraFaturas;
 	}
+    
+	@RequestMapping("todoshistoricos")
+	public ModelAndView listarTodosHistorico(HttpSession sessao,RedirectAttributes redirectAttributes) {
 
+		if (sessao.getAttribute("usuario") == null) {
+			redirectAttributes.addFlashAttribute("erro",
+					"<div class=\" alert alert-danger\"> <strong>Acesso negado! </strong>"
+							+ " Você não está logado!</div>");
+			return new ModelAndView("redirect:/");
+
+		}
+		
+		ModelAndView model =new ModelAndView("listagem/listarviewgeral");
+		model.addObject("cons", this.listarFaturaGeral(faturagasto.todosHistoricos()));
+		model.addObject("modo", " Todos os Históricos");
+		return model;
+	}
+	 
+	
+	@RequestMapping(value="gasto/{id}", method=RequestMethod.GET)
+	public ModelAndView gastoPorHistorico(@PathVariable long id,RedirectAttributes redirectAttributes) {
+		gastodao.consultaGasto(id);
+		
+		return new ModelAndView("redirect:../todoshistoricos");
+	}
+	
+	
+	@RequestMapping(value="fatura/{id}")
+	public Fatura_Gastos consultarporID(@PathVariable long id) {
+		return new Fatura_Gastos();
+		//implementar
+		
+	}
 }

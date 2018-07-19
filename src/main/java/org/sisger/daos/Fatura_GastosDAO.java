@@ -34,4 +34,8 @@ public class Fatura_GastosDAO {
 		return manager.createQuery("from Fatura_Gastos fg where fg.situacao.nome=:sit", Fatura_Gastos.class)
 				.setParameter("sit", "Pendente").getResultList();
 	}
+	
+	public List<Fatura_Gastos>todosHistoricos(){
+		 return manager.createQuery("from Fatura_Gastos ",Fatura_Gastos.class).getResultList();
+	}
 }

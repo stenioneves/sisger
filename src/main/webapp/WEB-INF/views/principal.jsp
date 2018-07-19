@@ -58,10 +58,20 @@
 			<p>Sistema de gerenciamento de gasto pessoal</p>
 		</div>
 	</div>
-	<div id="efeito">
+	
 		<div class="container-fluid bg-3 text-center">
 			<h3>Categorias para consulta</h3>
 			<br>
+			<ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#home">Inicio</a></li>
+    <li><a data-toggle="pill" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
+  </ul>
+  <div class="tab-content">
+   <div id="home" class="tab-pane fade in active">
+	 <div id="efeito">
+	
 			<div class="row">
 				<div class="col-sm-3  ">
 					<p class=" panel panel-primary">Gasto com cartão de crédito</p>
@@ -112,12 +122,25 @@
 
 		<div class="container-fluid bg-3 text-center ">
 			<div class="row">
-				
-
-
-
+			<div class="col-sm-3">
+					<p class="panel panel-danger">Todos Historiocos/Gerencia</p>
+					<figure>
+						<img src="resources/img/cifrao.jpg" class="img-responsive"
+							style="width: 68%" alt="Image">
+						<figcaption>
+							<a href="listagem/todoshistoricos"><button class="btn btn-info btn-conf">Acessar</button></a>
+						</figcaption>
+					</figure>
+				</div>
+			
 			</div>
 		</div>
+	</div>
+	 <!-- Consulta  -->
+	 <div id="menu1" class="tab-pane fade">
+	     <p>Implementação</p>
+	  </div>
+	</div>
 	</div>
 	<br>
 	<br>

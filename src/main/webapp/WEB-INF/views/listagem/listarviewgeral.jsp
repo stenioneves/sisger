@@ -11,13 +11,18 @@
 <title>Módulo de Histórico</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	href="../resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="../resources/css/cssTelaPrincipal.css">
+	
+	<script
+	src="../resources/js/jquery.js"></script>
+	
+	
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="../css/cssTelaPrincipal.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	src="../resources/js/bootstrap.min.js"></script>
+
+
+<link rel="stylesheet" href="../resources/css/w3.css">
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -53,98 +58,121 @@
 		</div>
 	</div>
 	</nav>
-	<div class="w3-container efeito">
-		<h2>Esse é o retono para</h2>
-		<p>
-			${modo}
-			<!--fatura de gasto em aberto na modalidade credito/Debito e dinheiro fisico e o cartão associado:-->
-		</p>
-		<ul class="w3-ul w3-card-4 w3-hoverable">
-			<c:forEach var="fatura" items="${cons}">
-				<li class="w3-bar"
-					onclick="document.getElementById('${fatura.gf.codfatura}').style.display='block'" title=" Valor parcial R$:${fatura.soma}">
-					<span onclick="this.parentElement.style.display='none'"
-					class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-					<span class="w3-bar-item w3-right"><fmt:formatDate value="${fatura.gf.criacao }" pattern="dd/MM/yyyy"/></span>
-					<img src="${fatura.gf.metodotipo.fileimg}"
-					class="w3-bar-item w3-round w3-hide-small" style="width: 130px">
-					<div class="w3-bar-item">
-						<span class="w3-xlarge">${fatura.gf.metodotipo.nome}</span><br>
-						<!-- Pode ser substituido pelo Angular -->
-						<span>${fatura.gf.situacao.nome}</span><br> <span
-							class="w3-center w3-small w3-opacity">
-							${fatura.gf.responsavel.nome}</span>
-						<!-- fatura é uma estrutura de dados compexa atenção-->
-					</div>
-
-				</li>
-			</c:forEach>
-
-
-		</ul>
-		<c:forEach var="fat_gs" items="${cons}">
-			<div id="${fat_gs.gf.codfatura}" class="w3-modal">
-				<div class="w3-modal-content">
-
-					<header class="w3-container w3-indigo"> <span
-						onclick="document.getElementById('${fat_gs.gf.codfatura}').style.display='none'"
-						class="w3-button w3-display-topright">&times;</span>
-					<h5>Gastos associados ao historico: ${fat_gs.gf.codfatura}</h5>
-					</header>
-					<div class="w3-container">
-						<table class="w3-table-all">
-							<thead>
-								<tr class="w3-light-grey w3-hover-red">
-									<th>Nome</th>
-									<th>Tipo</th>
-									<th>Valor</th>
-									<th>Data</th>
-								</tr>
-							</thead>
-							<c:forEach var="gasto" items="${fat_gs.gastos_associados}">
+	 
+	 <div class="panel panel-default">
+    		<div class="panel-heading">
+    		 <div class="clearfix">
+    			<h1 class="panel-title co-titulo-panel"> ${modo}</h1>
+    		   
+    		 </div>   
+    		</div>
+	
+	    <div class="panel-body">
+	
+	    <table class="table table-bordered">
+	    <thead>
+	     <tr>
+	     <th scope="col">#</th>
+	     <th scope="col">Nome</th>
+	      <th scope="col">valor</th>
+	       <th scope="col">criaçao</th>
+	       <th scope="col">fechamento</th>
+	       <th scope="col">status</th>
+	       <th scope="col">Responsável</th>
+	       <th scope="col"></th>
+	       
+	     </tr>
+	      </thead>
+	      <tbody>
+	     <c:forEach var="historico" items="${cons}">
+	     <tr>
+	     <td scope="row"><a href="gasto/${historico.gf.codfatura }">${historico.gf.codfatura}</a></td>
+	     <td><img class="img-rounded" src="${historico.gf.metodotipo.fileimg}" style="width:10%"/><p class="metodo">${historico.gf.metodotipo.nome}</p></td>
+	     <td>${historico.soma}</td>
+	     <td><fmt:formatDate value="${historico.gf.criacao}" pattern="dd/MM/yyyy"/></td>
+	     <td><fmt:formatDate value="${historico.gf.fechamento}" pattern="dd/MM/yyyy"/></td>
+	     <td >
+	     <span class="${historico.gf.situacao.nome =='Pendente'?'label label-danger':'label label-success'}">
+	     
+	     ${historico.gf.situacao.nome}</span>
+	     </td>
+	     <td >${historico.gf.responsavel.nome}</td>
+	     
+	     <td> <c:if test="${historico.gf.situacao.nome =='Pendente'}"> <span class="label label-primary">Fechar</span>
+	        </c:if> 
+	        <a class="btn btn-link btn-xs btc" data-toggle="modal" data-target="#ExibirLancamento${historico.gf.codfatura }" title="Lançamentos"><span class="glyphicon glyphicon-eye-open"></span></a>
+	     </td>
+	     
+	     </tr>
+	    </c:forEach>
+	    </tbody>
+	    </table>
+	 
+	     </div>
+	    </div>       
+	
+	<c:forEach var="fat_gs" items="${cons}">        
+	         
+<div class="modal fade" id="ExibirLancamento${fat_gs.gf.codfatura}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Histórico de Lançamento</h4>
+      </div>
+      <div class="modal-body">
+         <div class="table-responsive">
+        <table class="table">
+           <thead>
+            <tr>
+            <th>#</th>
+             <th>Nome</th>
+             <th>Tipo</th>
+             <th>Valor</th>
+             <th>Data</th>
+             
+             <th></th>
+            
+            </tr>
+           
+           </thead>
+           <tbody>
+           
+           <c:forEach var="gasto" items="${fat_gs.gastos_associados}">
 								<tr class="w3-hover-blue">
+								    <td>${gasto.idGasto }</td>
 									<td>${gasto.nome}</td>
 									<td>${gasto.categoria.nome}</td>
 									<td>${gasto.valor}</td>
 									<td><fmt:formatDate value="${gasto.dateGasto}" pattern="dd/MM/yyyy"/>  </td>
+									<td><a href="gasto/${gasto.idGasto}" class="btn btn-link btn-xs"><span class="glyphicon glyphicon-search"></span></a></td>
 								</tr>
 							</c:forEach>
-							<!--  
-                  <tr class="w3-hover-green">
-                    <td>Jean Neves</td>
-                    <td>Serviços Web</td>
-                    <td>500.00</td>
-                  </tr>
-                  <tr class="w3-hover-blue">
-                    <td>Eve</td>
-                    <td>Jackson</td>
-                    <td>94</td>
-                  </tr>
-                  <tr class="w3-hover-black">
-                    <td>Adam</td>
-                    <td>Johnson</td>
-                    <td>67</td>
-                  </tr>
-                  <tr class="w3-hover-text-green">
-                    <td>Bo</td>
-                    <td>Nilson</td>
-                    <td>35</td>
-                  </tr>
-                  -->
-						</table>
-					</div>
-					<footer class="w3-container w3-indigo">
-					<p>Total R$: ${fat_gs.soma}</p>
-					</footer>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
-	<!--
-<footer class="container-fluid text-center">
-  <p>Stenio Neves|<a href="https://twitter.com/stenioneves1">Twitter</a></p>
-</footer>
--->
-
-</body>
-</html>
+           
+           
+           
+           
+           </tbody>
+           
+           
+       </table>
+     </div>
+       
+       
+       
+       
+       
+       
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+         
+      </div>
+    </div>
+  </div>
+</div>
+	</c:forEach>
+	
+	</body>
+	</html>

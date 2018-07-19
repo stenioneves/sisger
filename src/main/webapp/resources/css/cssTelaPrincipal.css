@@ -54,3 +54,14 @@ body{
     width: auto;
     height: auto;
 }
+.metodo{
+	margin-top:5px;
+	font-family: arial;
+	font-weight: bold;
+}
+
+/* configuração botão Lancamentos "olho"*/
+.btc{
+	margin-top:10px;
+	
+}

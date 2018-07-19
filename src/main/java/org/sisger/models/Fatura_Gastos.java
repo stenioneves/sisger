@@ -36,10 +36,10 @@ public class Fatura_Gastos {
 	@ManyToOne
 	@JoinColumn(name = "idMetodo")
 	private Metodo metodotipo;
-    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern="MM/dd/yyyy")
     @Temporal(TemporalType.DATE)
 	private Date criacao;
-    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern="MM/dd/yyyy")
     @Temporal(TemporalType.DATE)
 	private Date fechamento;
 	@ManyToOne

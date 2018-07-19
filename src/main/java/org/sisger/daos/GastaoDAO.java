@@ -29,4 +29,12 @@ public class GastaoDAO {
 	List<Gasto> listarGastos() {
 		return manage.createQuery("select distinct(g) from Gasto g", Gasto.class).getResultList();
 	}
+	
+	public Gasto consultaGasto(long id) {
+		
+		return manage.createQuery("from Gasto g where g.idGasto=:id",Gasto.class).setParameter("id", id)
+				.getSingleResult();
+		
+		
+	}
 }
