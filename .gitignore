@@ -2,4 +2,4 @@
 .jpg
 .gif
 .png
-JPAConfiguration.*
+!/JPAConfiguration.*
