@@ -2,4 +2,4 @@
 .jpg
 .gif
 .png
-JPAConfiguration.java
+src/main/java/org/sisger/confJPAConfiguration.java
